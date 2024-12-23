@@ -75,8 +75,8 @@ func main() {
 		renderIndex(context, nil)
 	})
 
-	engine.POST("/jump", func(context *gin.Context) {
-		dst := context.PostForm("dst")
+	engine.GET("/jump", func(context *gin.Context) {
+		dst := context.Query("dst")
 
 		if dst == "" {
 			renderIndex(context, map[string]any{
@@ -93,8 +93,8 @@ func main() {
 			return
 		}
 
-		username := context.PostForm("username")
-		password := context.PostForm("password")
+		username := context.Query("username")
+		password := context.Query("password")
 
 		if username == "" {
 			renderIndex(context, map[string]any{

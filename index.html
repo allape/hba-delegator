@@ -71,7 +71,7 @@
     <strong>Error:</strong> {{.error}}
   </div>
   {{end}}
-  <form class="form" action="/jump" method="post" enctype="multipart/form-data">
+  <form class="form" action="/jump" method="get" enctype="application/x-www-form-urlencoded">
     <div class="form-item">
       <label for="Destination">Destination:</label>
       <textarea id="Destination" name="dst" placeholder="URL" rows="5" required></textarea>
