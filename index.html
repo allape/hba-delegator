@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{if .title}}{{.title}}{{else}}Http Basic Auth Delegator - HBAD{{end}}</title>
+  <style>
+      html {
+          margin: 0;
+      }
+
+      .root {
+          max-width: 800px;
+          margin: 0 auto;
+      }
+
+      .error {
+          color: orangered;
+          background-color: white;
+      }
+
+      .form {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: stretch;
+          align-items: center;
+          gap: 10px;
+      }
+
+      .form-item {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 5px;
+      }
+
+      .button {
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+      }
+
+      @media (prefers-color-scheme: dark) {
+          body {
+              background-color: #333;
+              color: #fff;
+          }
+      }
+
+      @media screen and (max-width: 400px) {
+          .button {
+              padding: 40px 0;
+          }
+
+          .button > button {
+              padding: 20px 40px;
+              font-size: 24px;
+          }
+
+          input {
+              font-size: 20px;
+          }
+      }
+  </style>
+</head>
+<body>
+<div class="root">
+  {{if .error}}
+  <div class="error">
+    <strong>Error:</strong> {{.error}}
+  </div>
+  {{end}}
+  <form class="form" action="/jump" method="post" enctype="multipart/form-data">
+    <div class="form-item">
+      <label for="Destination">Destination:</label>
+      <textarea id="Destination" name="dst" placeholder="URL" rows="5" required></textarea>
+    </div>
+    <div class="form-item">
+      <label for="Username">Username:</label>
+      <input type="text" id="Username" name="username" required>
+    </div>
+    <div class="form-item">
+      <label for="Password">Password:</label>
+      <input type="password" id="Password" name="password">
+    </div>
+    <div class="form-item button">
+      <button type="submit">Login</button>
+    </div>
+  </form>
+  <ul class="history-list">
+    {{range .histories}}
+    <li onclick="fillDst(this)" title="{{.UpdatedAt}}">{{.URL}}</li>
+    {{else}}
+    <li><strong>Empty</strong></li>
+    {{end}}
+  </ul>
+</div>
+<script>
+  /**
+   * @param {HTMLElement} ele
+   */
+  function fillDst(ele) {
+    document.getElementById('Destination').value = ele.innerText;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+name: hbad
+services:
+  app:
+    image: allape/hbad:latest
+    container_name: hbad
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
