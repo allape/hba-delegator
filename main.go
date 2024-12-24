@@ -109,7 +109,7 @@ func main() {
 			URL: dst,
 		}
 
-		err = db.Model(&history).First(&history).Error
+		err = db.Where(&history).First(&history).Error
 		if err != nil {
 			db.Create(&history)
 		} else {
